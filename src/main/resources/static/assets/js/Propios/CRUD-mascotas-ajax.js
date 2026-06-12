@@ -104,10 +104,7 @@ function idenElim(id){
         data: {},
         success: function (mascota){
             document.getElementById('id-delete').value = mascota.id;
-            document.getElementById('nombre-delete').value = mascota.nombre;
-            document.getElementById("edad-delete").value = mascota.edad;
-            document.getElementById('raza-delete').value = mascota.raza;
-            document.getElementById('observaciones-delete').value = mascota.observaciones;
+            document.getElementById('nombre-delete').innerText = "Estas seguro de eliminar a la mascota "+mascota.nombre+"?";
         }
     });
 }
