@@ -105,28 +105,19 @@
         </div>
         <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content"><form class="needs-validation" novalidate>
-              <div class="modal-header"><h2 class="modal-title h5">Eliminar mascota</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title h5" id="confirmModalLabel">Confirm Action</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
               <div class="modal-body">
                 <input type="hidden" value="0" id="id-delete">
-                <form class="panel needs-validation" novalidate>
-                  <div class="row g-3">
-                    <div class="col-md-6"><label class="form-label" for="nombre-delete">Nombre</label><input class="form-control" id="nombre-delete" required><div class="invalid-feedback">Se necesita el nombre.</div></div>
-                    <div class="col-md-6"><label class="form-label" for="edad-delete">Edad</label><input class="form-control" id="edad-delete" type="number" min="0" required><div class="invalid-feedback">Ingrese una edad valida.</div></div>
-                    <div class="col-md-6"><label class="form-label" for="raza-delete">Raza</label>
-                      <select class="form-select" id="raza-delete" required><option value="1">Gran perro</option>
-                        <option value="2">Chihuahua</option>
-                        <option value="3">Labrador</option>
-                        <option value="4">Huski</option>
-                      </select>
-                      <div class="invalid-feedback">Elige una raza.</div></div>
-                    <div class="col-12"><label class="form-label" for="observaciones-delete">Observaciones</label><textarea class="form-control" id="observaciones-delete" rows="5"></textarea></div></div>
-                  <div class="d-flex justify-content-end mt-4">
-                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger" onclick="eliminar()"><i class="bi bi-trash" aria-hidden="true"></i> Eliminar mascota</button></div>
-                </form>
+                <div class="col-md-6"><span id="nombre-delete"></span></div>
               </div>
-            </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="eliminar()">Confirm</button>
+              </div>
             </div>
           </div>
         </div>
