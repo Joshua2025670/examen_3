@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="adminHMD professional admin dashboard template">
+  <title>Lista De Mascotas</title>
+
+  <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+<style>
+  .dataTables_wrapper .dataTables_filter {
+  float: right;
+  text-align: right;}
+</style>
+<body>
+  <div class="admin-shell">
+
+
+    <div class="admin-main">
+
+
+      <main class="dashboard-content">
+        <div class="container-fluid px-3 px-lg-4 py-4">
+          <div class="page-heading">
+            <div class="page-heading-copy">
+              <div>
+                <p class="eyebrow mb-1">Mantenimiento</p>
+                <h1 class="h3 mb-1">De Mascotas</h1>
+              </div>
+            </div>
+            
+          </div>
+
+          <section class="panel">
+            <div class="panel-header"><div><h2 class="h5 mb-1 section-title"><span>Listado de Mascotas</span></h2></div><button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#formModal">Agregar</button></div>
+            <div class="table-responsive"><table class="table align-middle mb-0" id="ordersTable" data-searchable-table>
+              <thead><tr><th>Nombre</th><th>Edad</th><th class="text-end">Acciones</th></tr></thead><tbody>
+            </tbody></table></div>
+          </section>
+        </div>
+        <div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"><form class="needs-validation" novalidate>
+              <div class="modal-header"><h2 class="modal-title h5" >Editar mascota</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+              <div class="modal-body">
+                <input type="hidden" value="0" id="id-update">
+                <form class="panel needs-validation" novalidate>
+                  <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label" for="nombre-update">Nombre</label><input class="form-control" id="nombre-update" required><div class="invalid-feedback">Se necesita el nombre.</div></div>
+                    <div class="col-md-6"><label class="form-label" for="edad-update">Edad</label><input class="form-control" id="edad-update" type="number" min="0" required><div class="invalid-feedback">Ingrese una edad valida.</div></div>
+                    <div class="col-md-6"><label class="form-label" for="raza-update">Raza</label>
+                      <select class="form-select" id="raza-update" required><option value="1">Gran perro</option>
+                        <option value="2">Chihuahua</option>
+                        <option value="3">Labrador</option>
+                        <option value="4">Huski</option>
+                      </select>
+                      <div class="invalid-feedback">Elige una raza.</div></div>
+                    <div class="col-12"><label class="form-label" for="observaciones-update">Observaciones</label><textarea class="form-control" id="observaciones-update" rows="5"></textarea></div></div>
+                  <div class="d-flex justify-content-end mt-4">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="Act()"><i class="bi bi-send" aria-hidden="true"></i>Guardar mascota</button></div>
+                </form>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"><form class="needs-validation" novalidate>
+              <div class="modal-header"><h2 class="modal-title h5" id="formModalLabel">Agregar nueva mascota</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+              <div class="modal-body">
+                <form class="panel needs-validation" novalidate>
+                  <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label" for="nombre">Nombre</label><input class="form-control" id="nombre" required><div class="invalid-feedback">Se necesita el nombre.</div></div>
+                    <div class="col-md-6"><label class="form-label" for="edad">Edad</label><input class="form-control" id="edad" type="number" min="0" required><div class="invalid-feedback">Ingrese una edad valida.</div></div>
+                    <div class="col-md-6"><label class="form-label" for="raza">Raza</label>
+                      <select class="form-select" id="raza" required><option value="1">Gran perro</option>
+                        <option value="2">Chihuahua</option>
+                        <option value="3">Labrador</option>
+                        <option value="4">Huski</option>
+                      </select>
+                      <div class="invalid-feedback">Elige una raza.</div></div>
+                    <div class="col-12"><label class="form-label" for="observaciones">Observaciones</label><textarea class="form-control" id="observaciones" rows="5"></textarea></div></div>
+                  <div class="d-flex justify-content-end mt-4">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="guardar()"><i class="bi bi-send" aria-hidden="true"></i> Guardar mascota</button></div>
+                </form>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="modal-delete" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content"><form class="needs-validation" novalidate>
+              <div class="modal-header"><h2 class="modal-title h5">Eliminar mascota</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+              <div class="modal-body">
+                <input type="hidden" value="0" id="id-delete">
+                <form class="panel needs-validation" novalidate>
+                  <div class="row g-3">
+                    <div class="col-md-6"><label class="form-label" for="nombre-delete">Nombre</label><input class="form-control" id="nombre-delete" required><div class="invalid-feedback">Se necesita el nombre.</div></div>
+                    <div class="col-md-6"><label class="form-label" for="edad-delete">Edad</label><input class="form-control" id="edad-delete" type="number" min="0" required><div class="invalid-feedback">Ingrese una edad valida.</div></div>
+                    <div class="col-md-6"><label class="form-label" for="raza-delete">Raza</label>
+                      <select class="form-select" id="raza-delete" required><option value="1">Gran perro</option>
+                        <option value="2">Chihuahua</option>
+                        <option value="3">Labrador</option>
+                        <option value="4">Huski</option>
+                      </select>
+                      <div class="invalid-feedback">Elige una raza.</div></div>
+                    <div class="col-12"><label class="form-label" for="observaciones-delete">Observaciones</label><textarea class="form-control" id="observaciones-delete" rows="5"></textarea></div></div>
+                  <div class="d-flex justify-content-end mt-4">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" onclick="eliminar()"><i class="bi bi-trash" aria-hidden="true"></i> Eliminar mascota</button></div>
+                </form>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="admin-footer">
+        <div class="container-fluid px-3 px-lg-4">
+          <span>Copyright 2026 adminHMD. <br> Desarrollado por <a target="_blank" class="fw-bold text-success" href="https://github.com/HasanMahmudDev">Joshua Abraham Reyes Rodriguez 2025670140</a></span>
+          <span>Teoria Desarrollo de Aplicaciones Web.</span>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <script src="/plugins/jquery/jquery.min.js"></script>
+  <!-- DataTables  & Plugins -->
+  <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="/plugins/jszip/jszip.min.js"></script>
+  <script src="/plugins/pdfmake/pdfmake.min.js"></script>
+  <script src="/plugins/pdfmake/vfs_fonts.js"></script>
+  <script src="/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+  <script src="/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+  <script src="/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+  <script src="/assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    $(function () {
+      $("#ordersTable").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#ordersTable_wrapper .col-md-6:eq(0)');
+    });
+  </script>
+  <script src="/assets/js/main.js"></script>
+  <script src="/assets/js/Propios/CRUD-mascotas-ajax.js"></script>
+  <script>
+    $( document ).ready(function () {
+      //Function Query se manda a llamar
+      //Cuando la pagina se cargo completamente
+      //Se muestra
+      listar();
+    });
+  </script>
+</body>
+</html>
